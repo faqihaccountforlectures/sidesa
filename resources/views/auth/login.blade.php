@@ -182,6 +182,64 @@ body::after{
     color:#888;
     font-size:13px;
 }
+.alert-error{
+      background:#fee2e2;
+      color:#dc2626;
+      padding:12px;
+      border-radius:10px;
+      margin-bottom:20px;
+      text-align:center;
+      font-weight:bold;
+      border:1px solid #fca5a5;
+    }
+    .divider{
+    display:flex;
+    align-items:center;
+    margin:20px 0;
+    color:#999;
+    font-size:14px;
+}
+
+.divider::before,
+.divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:#ddd;
+}
+
+.divider span{
+    margin:0 15px;
+}
+
+.google-btn{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    background:#fff;
+    color:#444;
+    font-size:15px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    cursor:pointer;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.google-btn:hover{
+    background:#f8f9fa;
+    border-color:#ccc;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.google-btn img{
+    width:22px;
+    height:22px;
+}
 
 @media(max-width:768px){
 
@@ -226,11 +284,23 @@ body::after{
             <p>Silakan Login Terlebih Dahulu</p>
         </div>
 
-        <form action="proses_login.php" method="POST">
+        @if(session('alert'))
+            <div class="alert-error" style="background:#fefce8; color:#a16207; border-color:#fef08a;">
+                {{ session('alert') }}
+            </div>
+        @endif
+
+       @if ($errors->any())
+    <div class="alert-error">
+        {{ $errors->first() }}
+    </div>
+@endif
+    <form action="{{ route('auth.authentication') }}" method="POST">
+    {{ csrf_field() }}
 
             <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Masukkan Username">
+                <label>Email</label>
+                <input type="email" name="email" value="{{ old('email') }}" placeholder="Masukkan Email">
             </div>
 
             <div class="form-group">
@@ -242,14 +312,25 @@ body::after{
                 LOGIN
             </button>
 
+            <div class="divider">
+                <span>atau</span>
+            </div>
+
+            <a href="{{ route('auth.redirect') }}" class="google-btn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                Login dengan Google
+            </a>
+
         </form>
 
         <div class="extra-links">
-            <a href="#">Lupa Password?</a>
+            <a href="{{ route('password.request') }}">
+    Lupa Password?
+</a>
         </div>
         <div class="register-link">
         Belum punya akun?
-        <a href="register">Daftar Sekarang</a>
+        <a href="{{ route('auth.register') }}">Daftar Sekarang</a>
     </div>
 
         <div class="footer-text">

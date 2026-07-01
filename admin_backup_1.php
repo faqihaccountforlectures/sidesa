@@ -1,0 +1,2 @@
+"<!DOCTYPE html>\n<html lang=\"id\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>@yield('title') - SIDESA Admin</title>\n    \n    <!-- Fonts -->\n    <link href=\"https:
+<truncated 12478 bytes>

@@ -199,55 +199,70 @@ body{
             <h2>Buat Akun Baru</h2>
             <p>Lengkapi data di bawah ini</p>
         </div>
-
-        <form>
-
+@if ($errors->any())
+    <div style="
+        background:#ef4444;
+        color:white;
+        padding:12px;
+        border-radius:10px;
+        margin-bottom:20px;
+    ">
+        <ul style="margin:0;padding-left:20px;">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        <form action="{{ route('auth.store') }}" method="POST">
+        @csrf
             <div class="form-group">
                 <label>Nama Lengkap</label>
-                <input type="text" placeholder="Masukkan nama lengkap">
+                <input type="text" name="name" value="{{ old('name') }}" placeholder="Masukkan nama lengkap">
             </div>
 
             <div class="row">
 
                 <div class="form-group">
                     <label>NIK</label>
-                    <input type="text" placeholder="16 digit NIK">
+                    <input type="text" name="nik" value="{{ old('nik') }}" placeholder="16 digit NIK">
                 </div>
 
                 <div class="form-group">
                     <label>No. HP</label>
-                    <input type="text" placeholder="08xxxxxxxxxx">
+                    <input type="tel" name="telp" value="{{ old('telp') }}" placeholder="08xxxxxxxxxx">
                 </div>
 
             </div>
 
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" placeholder="nama@email.com">
+                <input type="email" name="email" value="{{ old('email') }}" placeholder="nama@email.com">
             </div>
 
             <div class="form-group">
                 <label>Alamat</label>
-                <input type="text" placeholder="Masukkan alamat lengkap">
+                <input type="text" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan alamat lengkap">
             </div>
 
             <div class="row">
 
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" placeholder="Buat username">
+                    <input type="text" name="username" value="{{ old('username') }}" placeholder="Buat username">
                 </div>
 
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" placeholder="Buat password">
+                    <input type="password" name="password" placeholder="Buat password">
                 </div>
 
             </div>
 
             <div class="form-group">
                 <label>Konfirmasi Password</label>
-                <input type="password" placeholder="Ulangi password">
+                <input type="password" id="confirmPassword"
+               name="password_confirmation" placeholder="Ulangi password">
             </div>
 
             <button type="submit" class="btn-register">
@@ -258,7 +273,7 @@ body{
 
         <div class="login-link">
             Sudah punya akun?
-            <a href="login">Login di sini</a>
+            <a href="{{ route('auth.login') }}">Login di sini</a>
         </div>
 
     </div>
