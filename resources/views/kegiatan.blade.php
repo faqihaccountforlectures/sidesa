@@ -232,9 +232,78 @@
                             </div>
                         </div>
 
-                        <p class="kegiatan-desc">
+                        <p class="kegiatan-desc mb-4">
                             {{ Str::limit($agenda->deskripsi, 120) }}
                         </p>
+                        
+                        <div class="mt-auto">
+                            <button type="button" class="btn btn-success w-100 rounded-pill py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#kegiatanModal{{ $agenda->id }}">
+                                <i class="fa-solid fa-circle-info me-2"></i> Lihat Detail
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Detail Kegiatan -->
+            <div class="modal fade" id="kegiatanModal{{ $agenda->id }}" tabindex="-1" aria-labelledby="kegiatanModalLabel{{ $agenda->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content border-0 shadow-lg" style="border-radius: 24px; overflow: hidden;">
+                        <div class="modal-header border-0 p-0" style="position: absolute; top: 15px; right: 15px; z-index: 10;">
+                            <button type="button" class="btn-close bg-white p-2 rounded-circle shadow-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-0">
+                            @if($agenda->gambar)
+                                <img src="{{ Storage::url($agenda->gambar) }}" class="w-100" style="height: 350px; object-fit: cover;" alt="{{ $agenda->judul }}">
+                            @else
+                                <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-100" style="height: 350px; object-fit: cover;" alt="Default Kegiatan">
+                            @endif
+                            <div class="p-4 p-md-5">
+                                <span class="status-badge position-static mb-3 d-inline-block {{ $badgeClass }}">
+                                    {{ $agenda->status }}
+                                </span>
+                                <h2 class="fw-bold text-dark mb-4">{{ $agenda->judul }}</h2>
+                                
+                                <div class="row g-4 mb-4">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start gap-3">
+                                            <div class="meta-icon bg-light"><i class="fa-solid fa-calendar-days"></i></div>
+                                            <div>
+                                                <small class="text-muted d-block">Waktu Pelaksanaan</small>
+                                                <strong>{{ \Carbon\Carbon::parse($agenda->tanggal)->translatedFormat('d F Y') }} • {{ $agenda->jam }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start gap-3">
+                                            <div class="meta-icon bg-light"><i class="fa-solid fa-users"></i></div>
+                                            <div>
+                                                <small class="text-muted d-block">Penyelenggara</small>
+                                                <strong>{{ $agenda->penyelenggara ?? 'Pemerintah Desa' }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-start gap-3">
+                                            <div class="meta-icon bg-light"><i class="fa-solid fa-location-dot"></i></div>
+                                            <div>
+                                                <small class="text-muted d-block">Lokasi</small>
+                                                <strong>{{ $agenda->lokasi }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <hr class="my-4">
+                                
+                                <div class="kegiatan-detail-desc">
+                                    <h5 class="fw-bold mb-3">Deskripsi Kegiatan</h5>
+                                    <div class="text-secondary" style="line-height: 1.8; text-align: justify;">
+                                        {!! nl2br(e($agenda->deskripsi)) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
