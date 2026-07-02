@@ -4,280 +4,98 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registrasi Akun Desa</title>
-
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#0f766e,#16a34a);
-    padding:30px;
-}
-
-.container{
-    width:1000px;
-    max-width:100%;
-    display:flex;
-    overflow:hidden;
-    border-radius:25px;
-    backdrop-filter:blur(15px);
-    background:rgba(255,255,255,0.15);
-    box-shadow:0 15px 40px rgba(0,0,0,.2);
-}
-
-.left{
-    flex:1;
-    color:white;
-    padding:60px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    background:rgba(255,255,255,.08);
-}
-
-.left img{
-    width:110px;
-    margin-bottom:20px;
-}
-
-.left h1{
-    font-size:34px;
-    margin-bottom:15px;
-}
-
-.left p{
-    line-height:1.8;
-    opacity:.9;
-}
-
-.right{
-    flex:1.2;
-    background:white;
-    padding:45px;
-}
-
-.header{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.header h2{
-    color:#166534;
-    font-size:28px;
-}
-
-.header p{
-    color:#777;
-    margin-top:5px;
-}
-
-.form-group{
-    margin-bottom:18px;
-}
-
-.form-group label{
-    display:block;
-    margin-bottom:8px;
-    color:#444;
-    font-weight:500;
-}
-
-.form-group input{
-    width:100%;
-    padding:14px 16px;
-    border:1px solid #ddd;
-    border-radius:12px;
-    font-size:14px;
-    transition:.3s;
-}
-
-.form-group input:focus{
-    outline:none;
-    border-color:#16a34a;
-    box-shadow:0 0 10px rgba(22,163,74,.15);
-}
-
-.row{
-    display:flex;
-    gap:15px;
-}
-
-.row .form-group{
-    flex:1;
-}
-
-.btn-register{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:12px;
-    background:linear-gradient(135deg,#16a34a,#0f766e);
-    color:white;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    margin-top:10px;
-    transition:.3s;
-}
-
-.btn-register:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 20px rgba(22,163,74,.25);
-}
-
-.login-link{
-    text-align:center;
-    margin-top:20px;
-    color:#666;
-}
-
-.login-link a{
-    color:#16a34a;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.login-link a:hover{
-    text-decoration:underline;
-}
-
-@media(max-width:900px){
-
-    .container{
-        flex-direction:column;
-    }
-
-    .left{
-        text-align:center;
-        padding:40px;
-    }
-
-    .right{
-        padding:30px;
-    }
-
-    .row{
-        flex-direction:column;
-        gap:0;
-    }
-
-}
-
+    body { font-family: 'Poppins', sans-serif; }
 </style>
 </head>
-<body>
+<body class="min-h-screen flex justify-center items-center bg-[#0ca26e] p-4 relative overflow-hidden">
 
-<div class="container">
+<!-- Decorative Background Circles -->
+<div class="absolute -top-[150px] -left-[150px] w-[500px] h-[500px] bg-white/10 rounded-full"></div>
+<div class="absolute -bottom-[150px] -right-[150px] w-[450px] h-[450px] bg-white/10 rounded-full"></div>
 
-    <div class="left">
-
-        <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png">
-
-        <h1>Portal Desa Digital</h1>
-
-        <p>
-            Daftarkan akun Anda untuk mengakses berbagai layanan
-            administrasi desa secara online, cepat, mudah, dan aman.
-        </p>
-
-    </div>
-
-    <div class="right">
-
-        <div class="header">
-            <h2>Buat Akun Baru</h2>
-            <p>Lengkapi data di bawah ini</p>
+<div class="w-full max-w-[900px] flex flex-col md:flex-row bg-white rounded-[24px] overflow-hidden shadow-2xl relative z-10">
+    
+    <!-- Left Side -->
+    <div class="md:w-[40%] bg-[#4fa57e] p-10 flex flex-col justify-center items-center text-center text-white relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#38b27e] to-[#209460] opacity-90"></div>
+        <div class="relative z-10 flex flex-col items-center">
+            <i class="fa-solid fa-location-dot text-[60px] text-[#ff2a2a] mb-6 drop-shadow-md"></i>
+            <h1 class="text-2xl font-bold mb-4">Portal Desa Digital</h1>
+            <p class="text-sm opacity-90 leading-relaxed px-2">
+                Daftarkan akun Anda untuk mengakses berbagai layanan administrasi secara online.
+            </p>
         </div>
-@if ($errors->any())
-    <div style="
-        background:#ef4444;
-        color:white;
-        padding:12px;
-        border-radius:10px;
-        margin-bottom:20px;
-    ">
-        <ul style="margin:0;padding-left:20px;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
     </div>
-@endif
+
+    <!-- Right Side -->
+    <div class="md:w-[60%] p-8 md:p-10">
+        <div class="text-center mb-6">
+            <h2 class="text-[#166534] text-2xl font-bold">Buat Akun Baru</h2>
+            <p class="text-gray-500 text-sm mt-1">Lengkapi data di bawah ini</p>
+        </div>
+
+        @if ($errors->any())
+        <div class="bg-red-100 text-red-600 p-3 rounded-lg mb-4 text-sm font-medium">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <form action="{{ route('auth.store') }}" method="POST">
-        @csrf
-            <div class="form-group">
-                <label>Nama Lengkap</label>
-                <input type="text" name="name" value="{{ old('name') }}" placeholder="Masukkan nama lengkap">
-            </div>
-
-            <div class="row">
-
-                <div class="form-group">
-                    <label>NIK</label>
-                    <input type="text" name="nik" value="{{ old('nik') }}" placeholder="16 digit NIK">
+            @csrf
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1.5">Nama Lengkap</label>
+                    <input type="text" name="name" value="{{ old('name') }}" placeholder="Masukkan nama" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#16a34a] focus:ring-2 focus:ring-[#16a34a]/20 transition-all text-sm">
                 </div>
-
-                <div class="form-group">
-                    <label>No. HP</label>
-                    <input type="tel" name="telp" value="{{ old('telp') }}" placeholder="08xxxxxxxxxx">
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1.5">NIK</label>
+                    <input type="text" name="nik" value="{{ old('nik') }}" placeholder="16 digit NIK" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#16a34a] focus:ring-2 focus:ring-[#16a34a]/20 transition-all text-sm">
                 </div>
-
-            </div>
-
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" name="email" value="{{ old('email') }}" placeholder="nama@email.com">
-            </div>
-
-            <div class="form-group">
-                <label>Alamat</label>
-                <input type="text" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan alamat lengkap">
-            </div>
-
-            <div class="row">
-
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" value="{{ old('username') }}" placeholder="Buat username">
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1.5">No. HP</label>
+                    <input type="tel" name="telp" value="{{ old('telp') }}" placeholder="08xxxxxxxxxx" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#16a34a] focus:ring-2 focus:ring-[#16a34a]/20 transition-all text-sm">
                 </div>
-
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" placeholder="Buat password">
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1.5">Email</label>
+                    <input type="email" name="email" value="{{ old('email') }}" placeholder="nama@email.com" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#16a34a] focus:ring-2 focus:ring-[#16a34a]/20 transition-all text-sm">
                 </div>
-
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1.5">Username</label>
+                    <input type="text" name="username" value="{{ old('username') }}" placeholder="Buat username" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#16a34a] focus:ring-2 focus:ring-[#16a34a]/20 transition-all text-sm">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1.5">Alamat</label>
+                    <input type="text" name="alamat" value="{{ old('alamat') }}" placeholder="Masukkan alamat lengkap" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#16a34a] focus:ring-2 focus:ring-[#16a34a]/20 transition-all text-sm">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1.5">Password</label>
+                    <input type="password" name="password" placeholder="Buat password" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#16a34a] focus:ring-2 focus:ring-[#16a34a]/20 transition-all text-sm">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-medium mb-1.5">Konfirmasi Password</label>
+                    <input type="password" name="password_confirmation" placeholder="Ulangi password" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#16a34a] focus:ring-2 focus:ring-[#16a34a]/20 transition-all text-sm">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Konfirmasi Password</label>
-                <input type="password" id="confirmPassword"
-               name="password_confirmation" placeholder="Ulangi password">
-            </div>
-
-            <button type="submit" class="btn-register">
+            <button type="submit" class="w-full bg-[#008f4c] hover:bg-[#00783f] text-white font-bold py-3 rounded-xl transition duration-300 mt-2 text-sm shadow-[0_4px_10px_rgba(0,143,76,0.3)]">
                 DAFTAR SEKARANG
             </button>
-
         </form>
 
-        <div class="login-link">
-            Sudah punya akun?
-            <a href="{{ route('auth.login') }}">Login di sini</a>
+        <div class="text-center mt-5 text-gray-500 text-sm">
+            Sudah punya akun? 
+            <a href="{{ route('auth.login') }}" class="text-[#16a34a] font-bold hover:underline">Login di sini</a>
         </div>
-
     </div>
-
 </div>
 
 </body>
