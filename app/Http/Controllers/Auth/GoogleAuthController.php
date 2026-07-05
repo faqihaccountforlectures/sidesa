@@ -19,9 +19,15 @@ class GoogleAuthController extends Controller
     public function callback()
     {
         try {
-            $socialUser = Socialite::driver('google')->user();
+            $driver = Socialite::driver('google');
+            $driver->setHttpClient(new \GuzzleHttp\Client(['verify' => false]));
+            $socialUser = $driver->user();
 
             $user = User::where('email', $socialUser->email)->first();
+
+            if ($user && $user->role === 'admin') {
+                return redirect()->route('auth.login')->with('alert', 'Akses Ditolak: Akun Admin tidak diizinkan menggunakan Google Login. Silakan gunakan form login standar.');
+            }
 
             if (!$user) {
                 $user = User::create([
@@ -52,7 +58,7 @@ class GoogleAuthController extends Controller
             return redirect()->route('user.dashboard');
 
         } catch (\Exception $e) {
-            return redirect()->route('auth.login')->with('error', 'Terjadi kesalahan saat login dengan Google.');
+            return redirect()->route('auth.login')->with('alert', 'Gagal login: ' . $e->getMessage());
         }
     }
 }
